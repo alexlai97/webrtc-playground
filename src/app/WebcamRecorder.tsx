@@ -1,5 +1,7 @@
 'use client'
 
+import { DownloadOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
 import React, { useRef, useState, useEffect } from 'react';
 
 const WebcamRecorder: React.FC = () => {
@@ -69,19 +71,26 @@ const WebcamRecorder: React.FC = () => {
   return (
     <div>
       <h1>Webcam Video Recorder</h1>
-      <video ref={videoRef} autoPlay style={{ width: '100%', maxHeight: '400px' }}></video>
+      <video ref={videoRef} autoPlay muted style={{ width: '100%', maxHeight: '400px' }}></video>
       <div>
-        <button onClick={startRecording} disabled={isRecording || !mediaRecorder}>
+        <Button onClick={startRecording} disabled={isRecording || !mediaRecorder}>
           Start Recording
-        </button>
-        <button onClick={stopRecording} disabled={!isRecording}>
+        </Button>
+        <Button onClick={stopRecording} disabled={!isRecording}>
           Stop Recording
-        </button>
+        </Button>
       </div>
       {downloadUrl && (
-        <a href={downloadUrl} download="recorded-video.webm">
-          Download Video
-        </a>
+        <div style={{ marginTop: '20px' }}>
+          <Button
+            type="primary"
+            icon={<DownloadOutlined />}
+            href={downloadUrl}
+            download="recorded-video.webm"
+          >
+            Download Video
+          </Button>
+        </div>
       )}
     </div>
   );
